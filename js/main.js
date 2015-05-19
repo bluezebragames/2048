@@ -3,11 +3,15 @@ Tile = function(x,y,value){
 	this.x = x;
 	this.y = y;
 	this.value = value;
+
+	this.draw = function(){
+		Game.canvas.fillRect(0,0,50,50);
+	}
 }
 
-Tile.draw = function(){
-	Game.canvas.fillRect(0,0,50,50);
-}
+/*Tile.draw = function(){
+	
+}*/
 
 Game = {};
 

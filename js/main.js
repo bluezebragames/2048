@@ -16,3 +16,5 @@ Game.launch = function(){
 	Game.tile = new Tile(0,0,2);
 	Game.tile.draw();
 }
+
+Game.launch();

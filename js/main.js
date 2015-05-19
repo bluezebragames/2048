@@ -5,7 +5,7 @@ Tile = function(x,y,value){
 	this.value = value;
 
 	this.draw = function(){
-		Game.canvas.fillRect(0,0,50,50);
+		Game.context.fillRect(0,0,50,50);
 	}
 }
 
@@ -16,9 +16,12 @@ Tile = function(x,y,value){
 Game = {};
 
 Game.launch = function(){
-	Game.canvas = document.getElementById("canvas");
+	//Game.canvas = document.getElementById("canvas");
+	Game.context = document.getElementById("canvas").getContext("2d");
 	Game.tile = new Tile(0,0,2);
 	Game.tile.draw();
 }
 
-Game.launch();
+window.onload = function(){
+	Game.launch();
+}

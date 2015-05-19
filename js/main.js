@@ -8,6 +8,27 @@ Tile = function(x,y,value,cancombine){
 	this.draw = function(){
 		Game.context.fillStyle = Game.colormap.get(value);
 		Game.context.fillRect(Game.tilesize*x + 5*(x+1),Game.tilesize*y + 5*(y+1), Game.tilesize, Game.tilesize);
+		Game.context.fillStyle = "#000000";
+		if(this.value < 10)
+		{
+			Game.context.font = "20px Chalkduster";
+			Game.context.fillText(this.value, Game.tilesize*x + 5*(x+2),Game.tilesize*y + 5*(y+6));
+		}
+		else if(this.value > 10 && this.value < 100)
+		{
+			Game.context.font = "20px Chalkduster";
+			Game.context.fillText(this.value, Game.tilesize*x + 5*(x+1),Game.tilesize*y + 5*(y+6));
+		}
+		else if(this.value > 100 && this.value < 1000)
+		{
+			Game.context.font = "15px Chalkduster";
+			Game.context.fillText(this.value, Game.tilesize*x + 5*(x+1),Game.tilesize*y + 5*(y+6) - 2);
+		}
+		else if(this.value > 1000)
+		{
+			Game.context.font = "10px Chalkduster";
+			Game.context.fillText(this.value, Game.tilesize*x + 5*(x+1),Game.tilesize*y + 5*(y+5));
+		}
 	}
 }
 
@@ -53,7 +74,7 @@ Game.moveLeft = function(){
 					change = true;
 					//alert(change);
 				}
-				if(Game.tiles[x][y].cancombine && Game.tiles[x-1][y].value === Game.tiles[x][y].value)
+				if(Game.tiles[x][y].cancombine && Game.tiles[x-1][y].cancombine && Game.tiles[x-1][y].value === Game.tiles[x][y].value)
 				{
 					Game.score += Game.tiles[x][y].value;
 					Game.tiles[x][y] = 0;
@@ -88,7 +109,7 @@ Game.moveUp = function(){
 					Game.tiles[x][y-1] = new Tile(x,y-1,tempvalue,1);
 					change = true;
 				}
-				if(Game.tiles[x][y].cancombine && Game.tiles[x][y-1].value === Game.tiles[x][y].value)
+				if(Game.tiles[x][y].cancombine && Game.tiles[x][y-1].cancombine && Game.tiles[x][y-1].value === Game.tiles[x][y].value)
 				{
 					Game.score += 2*Game.tiles[x][y].value;
 					Game.tiles[x][y] = 0;
@@ -123,7 +144,7 @@ Game.moveRight = function(){
 					Game.tiles[x+1][y] = new Tile(x+1,y,tempvalue,1);
 					change = true;
 				}
-				if(Game.tiles[x][y].cancombine && Game.tiles[x+1][y].value === Game.tiles[x][y].value)
+				if(Game.tiles[x][y].cancombine && Game.tiles[x+1][y].cancombine && Game.tiles[x+1][y].value === Game.tiles[x][y].value)
 				{
 					Game.score += 2*Game.tiles[x][y].value;
 					Game.tiles[x][y] = 0;
@@ -158,7 +179,7 @@ Game.moveDown = function(){
 					Game.tiles[x][y+1] = new Tile(x,y+1,tempvalue,1);
 					change = true;
 				}
-				if(Game.tiles[x][y].cancombine && Game.tiles[x][y+1].value === Game.tiles[x][y].value)
+				if(Game.tiles[x][y].cancombine && Game.tiles[x][y+1].cancombine && Game.tiles[x][y+1].value === Game.tiles[x][y].value)
 				{
 					Game.score += 2*Game.tiles[x][y].value;
 					Game.tiles[x][y] = 0;
@@ -261,18 +282,18 @@ Game.drawTiles = function(){
 // maps each value to a color
 Game.initializeColormap = function(){
 	Game.colormap.set(2,"#FFFFFF");
-	Game.colormap.set(4,"#DBDBA2");
-	Game.colormap.set(8,"#F5B776");
-	Game.colormap.set(16,"#DE882C");
-	Game.colormap.set(32,"#DE562C");
-	Game.colormap.set(64,"#DE2C2C");
-	Game.colormap.set(128,"#F1F5C6");
-	Game.colormap.set(256,"#E4ED7B");
-	Game.colormap.set(512,"#DBED11");
-	Game.colormap.set(1024,"#A7ED11");
-	Game.colormap.set(2048,"#3DED11");
-	Game.colormap.set(4096,"#11EDB6");
-	Game.colormap.set(8192,"#000000");
+	Game.colormap.set(4,"#DDEEFF");
+	Game.colormap.set(8,"#C0DDFF");
+	Game.colormap.set(16,"#BBCCFF");
+	Game.colormap.set(32,"#A0BBFF");
+	Game.colormap.set(64,"#99AAFF");
+	Game.colormap.set(128,"#8899FF");
+	Game.colormap.set(256,"#7788FF");
+	Game.colormap.set(512,"#6677FF");
+	Game.colormap.set(1024,"#5566FF");
+	Game.colormap.set(2048,"#6677FF");
+	Game.colormap.set(4096,"#5566FF");
+	Game.colormap.set(8192,"#4455FF");
 }
 
 // let's launch this thing
